@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<header><meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0'></header>
+<html>
+    <head>
+    </head>
+
+    <body style="background-color:#08d1ff; font-size: 20px; ">
+        <h2><center>Webview</center></h2><br></br>
+        <button onclick="initSdk()">Initialize Adjust SDK</button><br>
+        <button onclick="adjustGetters()">Getter APIs SDK version</button><br>
+        <button onclick="trackEvent()">Track Event</button><br>
+        <button onclick="switchToOfflineMode()">Go Offline</button><br>
+        <button onclick="switchBackToOnlineMode()">Go Online</button><br>
+        <button onclick="trackThirdPartySharing()">Track Third party sharing</button><br>
+        <button onclick="addGlobalCallbackParameter()">Add Global Callback Parameter</button><br>
+        <button onclick="removeGlobalCallbackParameter()">Remove Global Callback Parameter By Key</button><br>
+        <button onclick="removeGlobalCallbackParameters()">Remove All Global Callback Parameters</button><br>
+        <button onclick="addGlobalPartnerParameter()">Add Global Partner Parameter</button><br>
+        <button onclick="removeGlobalPartnerParameter()">Remove Global Partner Parameter By Key</button><br>
+        <button onclick="removeGlobalPartnerParameters()">Remove All Global Partner Parameters</button><br>
+        <button onclick="gdprForgetMe()">Gdpr Forget Me</button><br>
+
+        <p id="demo"> </p>
+
+        <script>
+
+            window.onload = event => {
+                initSdk();
+            };
+
+            function initSdk() {
+                var adjustConfig = new AdjustConfig('2fm9gkqubvpc', AdjustConfig.EnvironmentSandbox);
+                adjustConfig.setLogLevel(AdjustConfig.LogLevelVerbose);
+
+                adjustConfig.setAttributionCallback(function(attributionData) {
+                    console.log(attributionData);
+                });
+
+                adjustConfig.setEventSuccessCallback(function(eventSuccessResponseData) {
+                    console.log(eventSuccessResponseData);
+                });
+
+                adjustConfig.setEventFailureCallback(function(eventFailureResponseData) {
+                    console.log(eventFailureResponseData);
+                });
+
+                adjustConfig.setSessionSuccessCallback(function(sessionSuccessResponseData) {
+                    console.log(sessionSuccessResponseData);
+                });
+
+                adjustConfig.setSessionFailureCallback(function(sessionFailureResponseData) {
+                    console.log(sessionFailureResponseData);
+                });
+
+                adjustConfig.setDeferredDeeplinkCallback(function(deferredDeeplinkResponseData) {
+                    console.log(deferredDeeplinkResponseData);
+                });
+
+                adjustConfig.setSkanUpdatedCallback(function(skanData) {
+                    console.log(skanData);
+                });
+
+                Adjust.initSdk(adjustConfig);
+            }
+
+            function adjustGetters() {
+                Adjust.requestAppTrackingAuthorizationWithCompletionHandler(function(status) {
+                    window.alert('Tracking permission status\n' + status)
+                });
+
+                Adjust.getAppTrackingAuthorizationStatus(function(status) {
+                   console.log(status);
+                });
+
+                Adjust.getSdkVersion(function(sdkVersion) {
+                    console.log(sdkVersion);
+                });
+
+                Adjust.getIdfa(function(idfa) {
+                    console.log(idfa);
+                });
+
+                Adjust.getIdfv(function(idfv) {
+                    console.log(idfv);
+                });
+
+                Adjust.getAttribution(function(attributionData) {
+                    console.log(attributionData);
+                });
+
+                Adjust.getAdid(function(adid) {
+                    console.log(adid);
+                });
+
+                Adjust.isEnabled(function(enabled) {
+                    console.log(enabled);
+                });
+            }
+
+            function trackEvent() {
+                var adjustEvent = new AdjustEvent('g3mfiw');
+                adjustEvent.setRevenue(5.01, 'EUR');
+                adjustEvent.addCallbackParameter('key', 'value');
+                adjustEvent.addCallbackParameter('x', 'y');
+                adjustEvent.addCallbackParameter('key', 'lock');
+                adjustEvent.addPartnerParameter('foo', 'bar');
+                adjustEvent.addPartnerParameter('x', 'y');
+                adjustEvent.addPartnerParameter('foo', 'foot');
+                adjustEvent.addPartnerParameter('x', 'z');
+                Adjust.trackEvent(adjustEvent);
+            }
+
+            function trackThirdPartySharing() {
+                var adjustThirdPartySharing = new AdjustThirdPartySharing(true);
+                adjustThirdPartySharing.addPartnerSharingSetting("partnerName", "key", true)
+                adjustThirdPartySharing.addGranularOption("xpto1", "key1", "value1", "xpto2", "key2", "value2")
+                Adjust.trackThirdPartySharing(adjustThirdPartySharing);
+            }
+
+            function addGlobalCallbackParameter() {
+                Adjust.addGlobalCallbackParameter('test_key', 'test_value');
+            }
+
+            function removeGlobalCallbackParameter() {
+                Adjust.removeGlobalCallbackParameter('test_key');
+            }
+
+            function removeGlobalCallbackParameters() {
+                Adjust.removeGlobalCallbackParameters();
+            }
+
+            function addGlobalPartnerParameter() {
+                Adjust.addGlobalPartnerParameter('test_key', 'test_value');
+            }
+
+            function removeGlobalPartnerParameter() {
+                Adjust.removeGlobalPartnerParameter('test_key');
+            }
+
+            function removeGlobalPartnerParameters() {
+                Adjust.removeGlobalPartnerParameters();
+            }
+
+            function gdprForgetMe() {
+                Adjust.gdprForgetMe();
+            }
+
+            function switchToOfflineMode() {
+                Adjust.switchToOfflineMode();
+            }
+
+            function switchBackToOnlineMode() {
+                Adjust.switchBackToOnlineMode();
+            }
+
+        </script>
+    </body>
+</html>
+
+
+
+

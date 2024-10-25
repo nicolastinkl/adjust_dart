@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<header><meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0'></header>
+<html>
+    <head>
+    </head>
+
+    <body style="background-color:#08d1ff; font-size: 20px; ">
+        <h2><center>Webview</center></h2><br></br>
+        <button onclick="initSdk()">Initialize Adjust SDK</button><br>
+        <button onclick="trackEvent()">Track Simple Event</button><br>
+        <button onclick="trackRevenueEvent()">Track Revenue Event</button><br>
+        <button onclick="trackNonExistingEventOne()">Track Non-Existing Event One</button><br>
+        <button onclick="trackNonExistingEventTwo()">Track Non-Existing Event Two</button><br>
+        <button onclick="switchToOfflineMode()">Go Offline</button><br>
+        <button onclick="switchBackToOnlineMode()">Go Online</button><br>
+        <button onclick="enableSdk()">Enable SDK</button><br>
+        <button onclick="disableSdk()">Disable SDK</button><br>
+        <button onclick="isSdkEnabled()">Is Sdk Enabled</button><br>
+
+        <p id="demo"> </p>
+
+        <script>
+            let config = {};
+            window.onload = event => {
+                initSdk();
+            };
+
+            function initSdk() {
+                console.log(this);
+                this.config = {
+                    fbid: '891530151031248',
+                    appid: '308873563017393',
+                    domain: null,
+                    fbqq: null
+                };
+
+                let fbqu = 'https://'
+                + (this.config.domain || 'connect.facebook.net')
+                + '/en_US/fbevents.js?'
+                + (this.config.fbqq || '');
+
+                !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+                    n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+                    n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+                    t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script',fbqu);
+
+                // Please make sure to call 'init' method first.
+                this.config.fbid && fbq('init', this.config.fbid.toString());
+                // And right after 'init', make a call to 'set' method BEFORE performing any tracking!
+                this.config.fbid && fbq('set', 'mobileBridge', this.config.fbid.toString(), this.config.appid.toString());
+
+                let adjustConfig = new AdjustConfig('2fm9gkqubvpc', AdjustConfig.EnvironmentSandbox);
+                adjustConfig.setLogLevel(AdjustConfig.LogLevelVerbose);
+
+                // Set up Facebook Pixel mappings.
+                adjustConfig.addFbPixelMapping('fb_mobile_search', 'g3mfiw');
+                adjustConfig.addFbPixelMapping('fb_mobile_purchase', 'a4fd35');
+                adjustConfig.setFbPixelDefaultEventToken('34vgg9');
+
+                Adjust.initSdk(adjustConfig);
+            }
+
+            function trackEvent() {
+                this.config.fbid && fbq('track', 'Search', {
+                    search_string: 'search_string_value',
+                    content_ids: ['123', '456'],
+                    content_type: 'content_type_value'
+                });
+            }
+
+            function trackRevenueEvent() {
+                this.config.fbid && fbq('track', 'Purchase', {
+                    contents:[{
+                        id: 'content_id_value_2q_10p',
+                        quantity: 1,
+                        item_price: 10}],
+                });
+            }
+
+            function trackNonExistingEventOne() {
+                this.config.fbid && fbq('track', 'fb_no_mapping', this.config.fbid.toString());
+            }
+
+            function trackNonExistingEventTwo() {
+                this.config.fbid && fbq('track', 'fb_no_mapping_again', this.config.fbid.toString());
+            }
+
+            function switchToOfflineMode() {
+                Adjust.switchToOfflineMode();
+            }
+
+            function switchBackToOnlineMode() {
+                Adjust.switchBackToOnlineMode();
+            }
+
+            function enableSdk() {
+                Adjust.enable();
+            }
+
+            function disableSdk() {
+                Adjust.disable();
+            }
+
+            function isSdkEnabled() {
+                Adjust.isEnabled(function(isEnabled) {
+                    alert('Is SDK enabled? ' + isEnabled)
+                });
+            }
+
+        </script>
+    </body>
+</html>
+
+
+
+
