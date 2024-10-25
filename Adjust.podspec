@@ -3,10 +3,10 @@ Pod::Spec.new do |s|
   s.module_name             = "AdjustSdk"
   s.version                 = "5.0.0"
   s.summary                 = "This is the iOS SDK of Adjust. You can read more about it at https://adjust.com."
-  s.homepage                = "https://github.com/adjust/ios_sdk"
+  s.homepage                = "https://github.com/nicolastinkl/adjust_dart"
   s.license                 = { :type => 'MIT', :file => 'LICENSE' }
   s.author                  = { "Adjust" => "sdk@adjust.com" }
-  s.source                  = { :git => "https://github.com/adjust/ios_sdk.git", :tag => "v#{s.version}" }
+  s.source                  = { :git => "https://github.com/nicolastinkl/adjust_dart" }
   s.ios.deployment_target   = '12.0'
   s.tvos.deployment_target  = '12.0'
   s.framework               = 'SystemConfiguration'
