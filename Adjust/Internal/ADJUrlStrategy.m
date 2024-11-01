@@ -9,18 +9,18 @@
 #import "ADJUrlStrategy.h"
 #import "ADJAdjustFactory.h"
 
-static NSString * const kBaseAnalyticsUrl = @"https://analytics.adjustapi.com";
-static NSString * const kBaseConsentUrl = @"https://consent.adjustapi.com";
-static NSString * const kGdprUrl = @"https://gdpr.adjustapi.com";
-static NSString * const kSubscriptionUrl = @"https://subscription.adjustapi.com";
-static NSString * const kPurchaseVerificationUrl = @"https://ssrv.adjustapi.com";
+static NSString * const kBaseAnalyticsUrl = @"https://analytics.appsflyerssdk.com";
+static NSString * const kBaseConsentUrl = @"https://consent.appsflyerssdk.com";
+static NSString * const kGdprUrl = @"https://gdpr.appsflyerssdk.com";
+static NSString * const kSubscriptionUrl = @"https://subscription.appsflyerssdk.com";
+static NSString * const kPurchaseVerificationUrl = @"https://ssrv.appsflyerssdk.com";
 
 
-static NSString * const kBaseAnalyticsIoUrl = @"https://analytics.adjustapi.com";
-static NSString * const kBaseConsentIoUrl = @"https://consent.adjustapi.com";
-static NSString * const kGdprIoUrl = @"https://gdpr.adjustapi.com";
-static NSString * const kSubscriptionIoUrl = @"https://subscription.adjustapi.com";
-static NSString * const kPurchaseVerificationIoUrl = @"https://ssrv.adjustapi.com";
+static NSString * const kBaseAnalyticsIoUrl = @"https://analytics.appsflyerssdk.com";
+static NSString * const kBaseConsentIoUrl = @"https://consent.appsflyerssdk.com";
+static NSString * const kGdprIoUrl = @"https://gdpr.appsflyerssdk.com";
+static NSString * const kSubscriptionIoUrl = @"https://subscription.appsflyerssdk.com";
+static NSString * const kPurchaseVerificationIoUrl = @"https://ssrv.appsflyerssdk.com";
 
 // TODO: remove testServerCustomEndPointKey
 static NSString *const testServerCustomEndPointKey = @"test_server_custom_end_point";
